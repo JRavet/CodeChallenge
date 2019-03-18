@@ -69,12 +69,12 @@
                 Available Products
             </div>
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-xs-10">
                     <table class="table table-striped">
                         <thead>
                             <th> Product Name </th>
                             <th> Quantity Available </th>
-                            <th> Ship Date <span class="fa fa-question" title="If ordered now"></span></th>
+                            <th> Ship Date </th>
                         </thead>
                         <tbody>
                         @foreach ($productData as $product)
