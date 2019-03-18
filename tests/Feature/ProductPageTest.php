@@ -3,16 +3,17 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class ProductPageTest extends TestCase
 {
+
     /**
-     * A basic test example.
-     *
-     * @return void
+     * @group webpageTests
+     * @group productTests
      */
-    public function testBasicTest()
+    public function testProductListWebpage()
     {
         $response = $this->get('/');
 
