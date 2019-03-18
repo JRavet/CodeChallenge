@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Available Products</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -61,6 +61,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .striped {
+                background-color: #cccccc;
+            }
         </style>
     </head>
     <body>
@@ -68,22 +72,34 @@
             <div class="title m-b-md">
                 Available Products
             </div>
-            <div class="row">
+            <div class="row flex-center">
                 <div class="col-xs-10">
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                             <th> Product Name </th>
                             <th> Quantity Available </th>
                             <th> Ship Date </th>
                         </thead>
                         <tbody>
-                        @foreach ($productData as $product)
-                            <tr>
-                                <td> {{$product->productName}} </td>
-                                <td> {{$product->inventoryQuantity}} </td>
-                                <td> {{$product->shipByDate}} </td>
-                            </tr>
-                        @endforeach
+                            @php $counter = 0; @endphp
+
+                            @foreach ($productData as $product)
+
+                                @if ($counter % 2 == 0)
+                                    @php $rowClass = "striped"; @endphp
+                                @else
+                                    @php $rowClass = ""; @endphp
+                                @endif
+
+                                <tr class="{{$rowClass}}">
+                                    <td> {{ $product->productName }} </td>
+                                    <td> {{ $product->inventoryQuantity }} </td>
+                                    <td> {{ $product->shipByDate }} </td>
+                                </tr>
+
+                                @php $counter++; @endphp
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
