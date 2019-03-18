@@ -69,8 +69,23 @@
                 Available Products
             </div>
             <div class="row">
-                <div class="col-xs-12">
-                Test
+                <div class="col-sm-10">
+                    <table class="table table-striped">
+                        <thead>
+                            <th> Product Name </th>
+                            <th> Quantity Available </th>
+                            <th> Ship Date <span class="fa fa-question" title="If ordered now"></span></th>
+                        </thead>
+                        <tbody>
+                        @foreach ($productData as $product)
+                            <tr>
+                                <td> {{$product->productName}} </td>
+                                <td> {{$product->inventoryQuantity}} </td>
+                                <td> {{$product->shipByDate}} </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
