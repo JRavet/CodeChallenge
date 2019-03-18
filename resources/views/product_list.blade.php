@@ -92,7 +92,7 @@
                         <tbody>
                             @php $counter = 0; @endphp
 
-                            @foreach ($productData as $product)
+                            @foreach ($products as $product)
 
                                 @if ($counter % 2 == 0)
                                     @php $rowClass = "striped"; @endphp
@@ -103,7 +103,7 @@
                                 <tr class="{{$rowClass}}">
                                     <td class="fs14 borderSpace15"> {{ $product->productName }} </td>
                                     <td> {{ $product->inventoryQuantity }} </td>
-                                    <td class="borderSpace15"> {{ $product->shipByDate }} </td>
+                                    <td class="borderSpace15"> {{ $product->ship_by_date_display }} </td>
                                 </tr>
 
                                 @php $counter++; @endphp
