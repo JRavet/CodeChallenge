@@ -14,7 +14,7 @@ class ProductViewController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function list(Request $request)
+    public function list()
     {
         $products = Product::getSampleData();
 
@@ -24,6 +24,32 @@ class ProductViewController extends BaseController
         return view('product_list', [
             'products' => $products,
             'orderDate' => $orderDate
+        ]);
+    }
+
+    public function ajaxReloadProductListPartial(Request $request)
+    {
+        $userOrderDate = $request->orderDate;
+
+        // example of below output: "Friday April 5th, 2019"
+        $orderDate = (new Carbon($userOrderDate))->format('l F jS, Y');
+
+        $products = Product::getSampleData();
+
+        foreach ($products as $product)
+        {
+            // set the shipByDate now using the provided date, so it doesn't default to the current time
+            $product->getShipByDate($userOrderDate);
+        }
+
+        $productListHtml = view('product_list_partial', [
+            'products' => $products
+        ])->render();
+
+        return json_encode([
+            'success' => true,
+            'orderDateHeaderText' => $orderDate,
+            'productListHtml' => $productListHtml
         ]);
     }
 

@@ -90,43 +90,43 @@
                     <h3 id="orderDateHeader"> Order date: {{ $orderDate }} </h3>
 
                     Change order date:
-                    <input name="orderDate" type="date" value="{{date('Y-m-d')}}" min="{{date('Y-m-d')}}">
+                    <input name="orderDate" id="orderDatePicker" type="date" value="{{date('Y-m-d')}}" min="{{date('Y-m-d')}}">
                 </div>
             </div>
             <div id="productList">
-                <div class="row flex-center">
-                    <div class="col-xs-10">
-                        <table class="table">
-                            <thead>
-                                <th> Product Name </th>
-                                <th> Quantity Available </th>
-                                <th> Ship Date </th>
-                            </thead>
-                            <tbody>
-                                @php $counter = 0; @endphp
-
-                                @foreach ($products as $product)
-
-                                    @if ($counter % 2 == 0)
-                                        @php $rowClass = "striped"; @endphp
-                                    @else
-                                        @php $rowClass = ""; @endphp
-                                    @endif
-
-                                    <tr class="{{$rowClass}}">
-                                        <td class="fs14 borderSpace15"> {{ $product->productName }} </td>
-                                        <td> {{ $product->inventoryQuantity }} </td>
-                                        <td class="borderSpace15"> {{ $product->ship_by_date_display }} </td>
-                                    </tr>
-
-                                    @php $counter++; @endphp
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                @include('product_list_partial', ['products' => $products])
             </div>
         </div>
     </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+  function ajaxUpdateView()
+  {
+    $.ajax({
+      dataType: 'json',
+      url: '/ajaxReloadProductListPartial',
+      data: {
+        orderDate: $('#orderDatePicker').val()
+      },
+      method: 'GET',
+      success: function(data) {
+        $('#orderDateHeader').text('Order date: ' + data['orderDateHeaderText']);
+        $('#productList').html(data['productListHtml']);
+      }
+    });
+  }
+
+  {{-- (Using a blade comment so it is not viewable by smart users) --}}
+  {{-- When the user de-selects the input element, use ajax to update the view with the new data --}}
+  $('#orderDatePicker').on('blur', function (e) {
+    e.preventDefault();
+    ajaxUpdateView();
+  });
+
+});
+</script>

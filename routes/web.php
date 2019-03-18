@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'ProductViewController@list');
+Route::get('/ajaxReloadProductListPartial', 'ProductViewController@ajaxReloadProductListPartial');
