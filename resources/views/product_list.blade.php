@@ -63,7 +63,16 @@
             }
 
             .striped {
-                background-color: #cccccc;
+                background-color: #dddddd;
+            }
+
+            .borderSpace15 {
+                padding: 15px;
+            }
+
+            .fs14 {
+                font-size: 1.166em;
+                /* approx 14 pixels, but scalable */
             }
         </style>
     </head>
@@ -92,9 +101,9 @@
                                 @endif
 
                                 <tr class="{{$rowClass}}">
-                                    <td> {{ $product->productName }} </td>
+                                    <td class="fs14 borderSpace15"> {{ $product->productName }} </td>
                                     <td> {{ $product->inventoryQuantity }} </td>
-                                    <td> {{ $product->shipByDate }} </td>
+                                    <td class="borderSpace15"> {{ $product->shipByDate }} </td>
                                 </tr>
 
                                 @php $counter++; @endphp
