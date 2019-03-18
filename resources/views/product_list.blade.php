@@ -74,6 +74,10 @@
                 font-size: 1.166em;
                 /* approx 14 pixels, but scalable */
             }
+
+            .mb20 {
+                margin-bottom: 20px;
+            }
         </style>
     </head>
     <body>
@@ -82,35 +86,45 @@
                 Available Products
             </div>
             <div class="row flex-center">
-                <div class="col-xs-10">
-                    <table class="table">
-                        <thead>
-                            <th> Product Name </th>
-                            <th> Quantity Available </th>
-                            <th> Ship Date </th>
-                        </thead>
-                        <tbody>
-                            @php $counter = 0; @endphp
+                <div class="col-xs-12 mb20">
+                    <h3 id="orderDateHeader"> Order date: {{ $orderDate }} </h3>
 
-                            @foreach ($products as $product)
+                    Change order date:
+                    <input name="orderDate" type="date" value="{{date('Y-m-d')}}" min="{{date('Y-m-d')}}">
+                </div>
+            </div>
+            <div id="productList">
+                <div class="row flex-center">
+                    <div class="col-xs-10">
+                        <table class="table">
+                            <thead>
+                                <th> Product Name </th>
+                                <th> Quantity Available </th>
+                                <th> Ship Date </th>
+                            </thead>
+                            <tbody>
+                                @php $counter = 0; @endphp
 
-                                @if ($counter % 2 == 0)
-                                    @php $rowClass = "striped"; @endphp
-                                @else
-                                    @php $rowClass = ""; @endphp
-                                @endif
+                                @foreach ($products as $product)
 
-                                <tr class="{{$rowClass}}">
-                                    <td class="fs14 borderSpace15"> {{ $product->productName }} </td>
-                                    <td> {{ $product->inventoryQuantity }} </td>
-                                    <td class="borderSpace15"> {{ $product->ship_by_date_display }} </td>
-                                </tr>
+                                    @if ($counter % 2 == 0)
+                                        @php $rowClass = "striped"; @endphp
+                                    @else
+                                        @php $rowClass = ""; @endphp
+                                    @endif
 
-                                @php $counter++; @endphp
+                                    <tr class="{{$rowClass}}">
+                                        <td class="fs14 borderSpace15"> {{ $product->productName }} </td>
+                                        <td> {{ $product->inventoryQuantity }} </td>
+                                        <td class="borderSpace15"> {{ $product->ship_by_date_display }} </td>
+                                    </tr>
 
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    @php $counter++; @endphp
+
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

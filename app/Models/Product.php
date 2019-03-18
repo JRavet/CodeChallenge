@@ -53,7 +53,7 @@ class Product extends Model
     public function getShipByDateDisplayAttribute()
     {
         // example of below output: "Friday April 5th, 2019"
-        return $this->getShipByDate()->format('l F jS, Y');;
+        return $this->getShipByDate()->format('l F jS, Y');
     }
 
     /**

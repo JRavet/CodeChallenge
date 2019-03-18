@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class ProductViewController extends BaseController
 {
@@ -17,8 +18,12 @@ class ProductViewController extends BaseController
     {
         $products = Product::getSampleData();
 
+        // example of below output: "Friday April 5th, 2019"
+        $orderDate = (Carbon::now())->format('l F jS, Y');
+
         return view('product_list', [
-            'products' => $products
+            'products' => $products,
+            'orderDate' => $orderDate
         ]);
     }
 
